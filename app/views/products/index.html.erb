@@ -1,0 +1,49 @@
+<h1>Products</h1>
+
+<% if @products %>
+
+    <table >
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+            <td>
+
+              <%  if false%>
+            <%= button_to 'Add to cart', carts_items_path(product_id: product),params: { start_point: 3.month.ago }%>
+                  <%  end%>
+              <%= form_for :quantity, :url => carts_items_path(product_id: product) do |form| %>
+                  <%= form.number_field :quantity, id: :quantity %>
+                  <%= submit_tag 'Add to cart', name: nil%>
+              <% end %>
+
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <p>There are no products yet</p>
+<% end %>
+
+
+<%  if false%>
+<%- form_with(model: item, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :quantity %>
+      <%= form.number_field :quantity, id: :item_quantity, class: "form-control width20" %>
+    </div>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+<% end %>
+<% end %>
